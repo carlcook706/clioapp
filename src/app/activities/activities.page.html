@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>CLIO</ion-title>
+    <ion-button slot="start" fill="outline">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-button> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Weekly Report</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Date:</ion-label>
+        <ion-datetime displayFormat="MM DD YY" placeholder="MM DD YY"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Time start:</ion-label>
+        <ion-datetime displayFormat="hh-mm-A" placeholder="HH MM A"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Time end:</ion-label>
+        <ion-datetime displayFormat="hh-mm-A" placeholder="HH MM A"></ion-datetime>
+      </ion-item>
+
+      <div class="uploadDTR">
+        Note: You need to upload your DTR for validation
+        <ion-button (click)="uploadDTR()" color="Gray">
+          <ion-icon name="document-attach"></ion-icon>
+          Upload DTR</ion-button>
+      </div>
+
+      <br>
+
+      <h1>Tasks</h1>
+      <ion-item-divider>
+        <ion-textarea placeholder="Enter tasks you did..."></ion-textarea>
+      </ion-item-divider>
+
+      <br>
+
+      <h1>Learnings</h1>
+      <ion-item-divider>
+        <ion-textarea placeholder="Enter what you learn..."></ion-textarea>
+      </ion-item-divider>
+      <br>
+      <ion-button  fill="outline" expand="block" (click)="weeklyReportSave()">Save</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
