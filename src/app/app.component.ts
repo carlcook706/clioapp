@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +9,20 @@ import {Router} from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router) {
+  constructor(public toastCtrl: ToastController,private storage: Storage,private router: Router) {
 
   }
-  logOut(){
+  async logOut(){
     this.router.navigate(['/log-in'])
+    this.storage.create();
+    this.storage.clear();
+
+    const toast = await this.toastCtrl.create({
+      message: 'Log out Succesfully.',
+      duration: 2000
+    });
+
+    toast.present();
   }
 
   account(){

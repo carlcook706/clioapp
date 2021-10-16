@@ -8,7 +8,10 @@ export class ApiService {
   constructor( public http: HttpClient) { }
 
   logIn(data){
-    return this.http.post('http://localhost/CLIO/backend/login.php',data)
+    return this.http.post('http://clio-rms.com/backend/login.php',data)
+  }
+  getHome(data){
+    return this.http.post('http://localhost/CLIO/backend/getHome.php',data)
   }
 }
 

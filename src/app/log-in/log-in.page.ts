@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { ApiService } from '../api.service';
 import { Storage } from '@ionic/storage-angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-log-in',
@@ -14,13 +15,13 @@ export class LogInPage implements OnInit {
   password : any;
   dataUser : any;
 
-  constructor(private storage: Storage, private router: Router, public _apiService : ApiService) { }
+  constructor(public toastCtrl: ToastController,private storage: Storage, private router: Router, public _apiService : ApiService) { }
 
   ngOnInit() {
     this.storage.create();
   }
   
-  logIn(){
+   async logIn(){
     let data = {
       username : this.username,
       password : this.password
@@ -31,15 +32,20 @@ export class LogInPage implements OnInit {
 
       this.storage.set('session_storage', res.result);
 
-      this.storage.get('session_storage').then((res)=>{
+      this.storage.get('session_storage').then(async (res)=>{
         this.dataUser = res;
-        
-        console.log("Datauser==",this.dataUser.username);
-        console.log("Datauserpass==",this.dataUser.password);
-      });
-      console.log("SUCCESS ===",res);
 
+        const toast = await this.toastCtrl.create({
+          message: 'Login Succesfully.',
+          duration: 2000
+        });
+
+        toast.present();
+  
+      });
+    
       this.router.navigate(['/home']);
+
     },(error:any) => {
       console.log("ERROR ===", error);
     }
