@@ -24,21 +24,14 @@ export class HomePage {
     this.storage.create();
     this.storage.get('session_storage').then((res)=>{
       this.datauser = res;
-
+      
       let data = {
         username : this.datauser.username
         
       }
+      this.username = this.datauser.username
       
-      this._apiService.getHome(data).subscribe((res:any) => {
-        console.log("SUCCESS ===",res);
-        this.homedata = res;
-        
-  
-      },(error:any) => {
-        console.log("ERROR ===", error);
-      }
-      )
+      
 
 
     });
